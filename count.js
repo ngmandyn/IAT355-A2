@@ -6,9 +6,7 @@ function getCount(data, columnName) {
     arr.push(d[columnName]);
   });
   // filter the array for empty or null values
-  arr.filter(function(value) {
-    return (value.length > 1 || value == null || value !== "")
-  });
+  var filtered = arr.filter(notEmpty);
 
-  return arr.length;
+  return filtered.length;
 }
