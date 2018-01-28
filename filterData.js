@@ -9,6 +9,8 @@ function stripUnits(data) {
 // filter units in columns defined in arrOfColumnNames
 function stripUnitsForColumns(data, arrOfColumnNames) {
   arrOfColumnNames.forEach(function(name) {
-    data[name] = stripUnits(data[name]);
+    if (data[name].length > 0 || data[name] !== null || data[name] !== undefined) {
+      data[name] = stripUnits(data[name]);
+    }
   });
 }
