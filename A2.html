@@ -15,22 +15,22 @@
 
   <script>
     // testing functions
-    gpuData.row(function(data, index) {
-            if (index < 50){
-              stripUnitsForColumns(data, ['Memory_Bus', 'Memory_Speed']);
-              return data;
-            }
-          })
-          .get(function(e, data) {
-            if(e) throw e;
-            console.log(data);
+    // gpuData.row(function(data, index) {
+    //         if (index < 50){
+    //           stripUnitsForColumns(data, ['Memory_Bus', 'Memory_Speed']);
+    //           return data;
+    //         }
+    //       })
+    //       .get(function(e, data) {
+    //         if(e) throw e;
+    //         console.log(data);
 
-            var mean = getMean(data, 'Memory_Bus');
-            console.log(mean);
+    //         var mean = getMean(data, 'Memory_Bus');
+    //         console.log(mean);
 
-            var count = getCount(data, 'Memory_Bus');
-            console.log(count);
-          });
+    //         var count = getCount(data, 'Memory_Bus');
+    //         console.log(count);
+    //       });
   </script>
 </body>
 

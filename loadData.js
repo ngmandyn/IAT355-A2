@@ -4,34 +4,43 @@ var gpuData = d3.csv(url);
 
 d3.csv(url, function(data) {
 
-  console.log(" # GPUs: " + data.length)
+  console.log("Total GPUs: " + data.length)
 
-  var lowROP = data.filter(function(d){
-    return (d.ROPs < 2 && d.ROPs != "");
-  });
+  console.log("Max: " + calculateMax(data, 'Core_Speed'));
 
-  console.log(lowROP);
+  console.log("Min: " + calculateMin(data, 'Core_Speed'));
 
-//   var calculateMax = d3.max(data, function(d) {
-//     return d['ROPs'];
-//   });
-
-//   console.log(calculateMax);
+  console.log("Sum: " + calculateSum(data, 'Core_Speed'));
 
 })
 
-function calculateMax (columnName, dataName) {
-  // d3.max(dataName, function(d) {
-  //   return d[columnName];
-  // });
-  return d3.max(dataName, d => d[columnName]);
+function notEmpty(value) {
+  if(value.length >= 1 && value !== null && value !== "" && value !== "\n" && value !== "↵- ") return true;
+  else return false;
 }
-console.log(calculateMax('ROPs', gpuData));
 
-
-function calculateMin (columnName, dataName) {
-  d3.min(dataName, function(d) {
-    return d[columnName];
+function calculateMax(data, columnName) {
+  var arr = [];
+  d3.map(data, function(d) {
+    arr.push(d[columnName]);
   });
+  console.log(arr.filter(notEmpty))
+  return d3.max(arr.filter(notEmpty));
 }
-console.log(calculateMin('ROPs', gpuData));
+
+function calculateMin(data, columnName) {
+  var arr = [];
+  d3.map(data, function(d) {
+    arr.push(d[columnName]);
+  });
+  console.log(arr.filter(notEmpty))
+  return d3.min(arr.filter(notEmpty));
+}
+
+function calculateSum(data, columnName) {
+  var arr = [];
+  d3.map(data, function(d) {
+    arr.push(d[columnName]);
+  });
+  return d3.sum(arr.filter(notEmpty));
+}
