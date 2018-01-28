@@ -6,9 +6,11 @@ var parseEmptyRegex = /\w+/;
 
 d3.csv(url, prepData, function(data) {
   console.log("Total GPUs: " + data.length)
-  console.log("Max: " + calculateMax(data, 'Core_Speed'));
-  console.log("Min: " + calculateMin(data, 'Core_Speed'));
-  console.log("Sum: " + calculateSum(data, 'Core_Speed'));
+  console.log("Max: " + getMax(data, 'Core_Speed'));
+  console.log("Min: " + getMin(data, 'Core_Speed'));
+  console.log("Sum: " + getSum(data, 'Core_Speed'));
+  console.log("Average: " + getMean(data, 'Core_Speed'));
+  console.log("Count: " + getCount(data, 'Core_Speed'));
 })
 
 function prepData(data) {
@@ -21,28 +23,22 @@ function notEmpty(value) {
   else return false;
 }
 
-function calculateMax(data, columnName) {
-  var arr = [];
-  d3.map(data, function(d) {
-    arr.push(d[columnName]);
-  });
-  console.log(arr.filter(notEmpty));
-  return d3.max(arr.filter(notEmpty));
+function getMax(data, columnName) {
+  return d3.max(data, function(d) {
+    return d[columnName];
+  })
 }
 
-function calculateMin(data, columnName) {
+function getMin(data, columnName) {
   var arr = [];
   d3.map(data, function(d) {
     arr.push(d[columnName]);
   });
-  console.log(arr.filter(notEmpty));
   return d3.min(arr.filter(notEmpty));
 }
 
-function calculateSum(data, columnName) {
-  var arr = [];
-  d3.map(data, function(d) {
-    arr.push(d[columnName]);
-  });
-  return d3.sum(arr.filter(notEmpty));
+function getSum(data, columnName) {
+  return d3.sum(data, function(d) {
+    return d[columnName];
+  })
 }
