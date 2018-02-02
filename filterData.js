@@ -1,5 +1,7 @@
 // searches for whole and decimal numbers
 var stripUnitRegex = /[0-9]+\.?/;
+// searches for all alphanumeric and underscore characters
+var parseEmptyRegex = /\w+/;
 
 // filter units - drop the unit string, convert resulting number to integer
 function stripUnits(data) {
@@ -13,4 +15,9 @@ function stripUnitsForColumns(data, arrOfColumnNames) {
       data[name] = stripUnits(data[name]);
     }
   });
+}
+
+// returns a boolean of whether the parameter value is empty or not
+function notEmpty(value) {
+  return (typeof value === 'number' || value.match(parseEmptyRegex) !== null);
 }
